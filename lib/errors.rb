@@ -5,26 +5,38 @@ class ToyCityError < StandardError
 end
 
 class DuplicateProductError < ToyCityError
-    attr_reader :product
+    attr_reader :product_title
 
-    def initialize(product)
-        @product = product
+    def initialize(title)
+        @product_title = title
     end
 
     def message
-        "'#{@product.title}' already exists."
+        "'#{@product_title}' already exists."
     end
 
 end
 
-class OutOfStockError < ToyCityError
-    attr_reader :product
+class DuplicateCustomerError < ToyCityError
+    attr_reader :customer
 
-    def initialize(product)
-        @product = product
+    def initialize(name)
+        @customer_name = name
     end
 
     def message
-        "'#{@product.title}' is out of stock."
+        "'#{@customer_name}' already exists."
+    end
+end
+
+class OutOfStockError < ToyCityError
+    attr_reader :product_title
+
+    def initialize(title)
+        @product_title = title
+    end
+
+    def message
+        "'#{@product_title}' is out of stock."
     end
 end

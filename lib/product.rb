@@ -42,7 +42,7 @@ class Product
 
     def add_new_product
         if self.class.find_by_title(@title)
-            raise DuplicateProductError.new(self)
+            raise DuplicateProductError.new(@title)
         else
             @@products << self
         end

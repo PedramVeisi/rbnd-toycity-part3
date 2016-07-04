@@ -5,7 +5,7 @@ class Customer
 
     def initialize(options = {})
         @name = options[:name] || ''
-        @@customers << self
+        add_new_customer
     end
 
     def self.all
@@ -17,7 +17,15 @@ class Customer
             if customer.name == name
                 return customer
             end
-            return nil
+        end
+        return nil
+    end
+
+    def add_new_customer
+        if self.class.find_by_name(@name)
+           raise DuplicateCustomerError.new(@name)
+        else
+           @@customers << self
         end
     end
 
@@ -25,7 +33,7 @@ class Customer
         if product.in_stock?
             Transaction.new(@name, product)
         else
-          raise OutOfStockError.new(product)  
+          raise OutOfStockError.new(product.title)  
         end
     end
 
