@@ -37,4 +37,8 @@ class Product
         @@products.select {|product| product.in_stock?}
     end
 
+    def update_stock
+        @stock -= 1
+    end
+
 end
