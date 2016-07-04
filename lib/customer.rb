@@ -21,4 +21,12 @@ class Customer
         end
     end
 
+    def purchase(product)
+        if product.in_stock?
+            Transaction.new(@name, product)
+        else
+          raise OutOfStockError.new(product)  
+        end
+    end
+
 end
